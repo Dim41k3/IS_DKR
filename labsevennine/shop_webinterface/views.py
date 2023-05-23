@@ -1,7 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from db_controller.models import ProductData, Inventory, OrderItem, OrderData
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -153,9 +152,6 @@ def routers(request):
     
     return render(request, 'routers.html', {"products": prod_dict})
 
-from django.shortcuts import render
-from django.http import HttpResponse
-
 def search(request):
     if request.method == 'POST':
         query = request.POST.get('query', '')
@@ -171,7 +167,7 @@ def search(request):
                 
                 filtered_products = []
                 for item in products:
-                    if query in item[1]:  # Assuming the name is at index 1 of the item
+                    if query in item[1]:  
                         filtered_products.append(item[1])
                     if query in item[0]:
                         if item[1] not in filtered_products:
